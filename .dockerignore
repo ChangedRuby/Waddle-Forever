@@ -1,0 +1,53 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Node
+node_modules
+npm-debug.log
+yarn-error.log
+package-lock.json
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Build outputs
+compiled
+dist
+build
+pkgdist
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Test
+coverage
+.nyc_output
+
+# OS
+Thumbs.db
+.AppleDouble
+.TemporaryItems
+
+# CI/CD
+.github
+
+# Documentation
+README.md
+LINUX.md
+LICENSE
+
+# Media (será baixado em runtime)
+media
+
+# Logs
+logs
+*.log
