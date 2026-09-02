@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  waddle-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: waddle-forever-server
+    ports:
+      - "${HTTP_PORT:-24105}:24105"
+      - "${LOGIN_PORT:-24106}:24106"
+      - "${WORLD_PORT:-24107}:24107"
+    environment:
+      - NODE_ENV=${NODE_ENV:-production}
+      - HTTP_PORT=${HTTP_PORT:-24105}
+    volumes:
+      - waddle-data:/app/data
+      - waddle-media:/app/media
+      - waddle-mods:/app/mods
+    restart: unless-stopped
+    networks:
+      - waddle-network
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:24105', (r) => {if (r.statusCode !== 404) throw new Error(r.statusCode)})"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+volumes:
+  waddle-data:
+    driver: local
+  waddle-media:
+    driver: local
+  waddle-mods:
+    driver: local
+
+networks:
+  waddle-network:
+    driver: bridge
