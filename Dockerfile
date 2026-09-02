@@ -11,6 +11,9 @@ RUN yarn install --frozen-lockfile
 # Copiar código-fonte
 COPY . .
 
+# Build dos pacotes (necessário antes do TypeScript)
+RUN yarn build-packages
+
 # Build do TypeScript
 RUN yarn build-tsc
 
